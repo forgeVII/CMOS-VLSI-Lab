@@ -1,27 +1,14 @@
-*** SPICE deck for cell nand_layout{lay} from library noname
-*** Created on Thu Aug 20, 2026 19:49:35
-*** Last revised on Thu Aug 20, 2026 21:36:11
-*** Written on Thu Aug 20, 2026 21:37:12 by Electric VLSI Design System, version 9.08
-*** Layout tech: mocmos, foundry MOSIS
-*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
-*CMOS/BULK-NWELL (PRELIMINARY PARAMETERS)
-
-*** TOP LEVEL CELL: nand_layout{lay}
-Mnmos@0 net@12 A gnd gnd NMOS L=0.6U W=3U AS=7.3P AD=0.33P PS=19U PD=1.7U
-Mnmos@1 Y B net@12 gnd NMOS L=0.6U W=3U AS=0.33P AD=0.887P PS=1.7U PD=3.4U
-Mpmos@0 Y A vdd vdd PMOS L=0.6U W=6U AS=8.3P AD=0.887P PS=14U PD=3.4U
-Mpmos@1 vdd B Y vdd PMOS L=0.6U W=6U AS=0.887P AD=8.3P PS=3.4U PD=14U
-
-Vdd vdd gnd 5
-
+*** SPICE deck for cell nand_layout{lay} - C5 (mocmos / MOSIS AMI 0.5um), models level 8
+*** VDD = 5V | Electric 200nm grid sizes: NMOS W=0.8u, PMOS W=1.6u, L=0.4u
+Mnmos@0 net@12 A gnd gnd N L=0.4U W=0.8U AS=7.3P AD=0.33P PS=19U PD=1.7U
+Mnmos@1 Y B net@12 gnd N L=0.4U W=0.8U AS=0.33P AD=0.887P PS=1.7U PD=3.4U
+Mpmos@0 Y A vdd vdd P L=0.4U W=1.6U AS=8.3P AD=0.887P PS=14U PD=3.4U
+Mpmos@1 vdd B Y vdd P L=0.4U W=1.6U AS=0.887P AD=8.3P PS=3.4U PD=14U
+vdd vdd gnd 5
 VA A gnd PULSE(5 0 0 10p 10p 10n 20n)
 VB B gnd PULSE(5 0 0 10p 10p 20n 40n)
-
 .tran 80n
-
-
-
-.MODEL NMOS NMOS (                                 LEVEL   = 8
+.MODEL N NMOS (                                 LEVEL   = 8
 +VERSION = 3.1            TNOM    = 27             TOX     = 1.39E-8
 +XJ      = 1.5E-7         NCH     = 1.7E17         VTH0    = 0.6696061
 +K1      = 0.8351612      K2      = -0.0839158     K3      = 23.1023856
@@ -56,8 +43,8 @@ VB B gnd PULSE(5 0 0 10p 10p 20n 40n)
 +CF      = 0              PVTH0   = 0.0585501      PRDSW   = 133.285505
 +PK2     = -0.0299638     WKETA   = -0.0248758     LKETA   = 1.173187E-3
 +AF      = 1              KF      = 0)
-
-.MODEL PMOS PMOS (                                 LEVEL   = 8
+*
+.MODEL P PMOS (                                 LEVEL   = 8
 +VERSION = 3.1            TNOM    = 27             TOX     = 1.39E-8
 +XJ      = 1.5E-7         NCH     = 1.7E17         VTH0    = -0.9214347
 +K1      = 0.5553722      K2      = 8.763328E-3    K3      = 6.3063558
@@ -92,5 +79,5 @@ VB B gnd PULSE(5 0 0 10p 10p 20n 40n)
 +CF      = 0              PVTH0   = 5.98016E-3     PRDSW   = 14.8598424
 +PK2     = 3.73981E-3     WKETA   = 5.292165E-3    LKETA   = -4.205905E-3
 +AF      = 1              KF      = 0)
-.END
+
 .END

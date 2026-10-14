@@ -1,24 +1,14 @@
-*** CMOS Inverter — College Method (C5 Models) ***
-*** AMI C5 0.5µm process — BSIM3 Level 8 ***
-*** VDD = 5V, Min L = 0.6µm, Min W = 3µm ***
+*** SPICE deck for cell inverter{sch} - CMOS inverter (schematic)
+*** Library: C5 (mocmos / MOSIS AMI 0.5um), models level 8
+*** VDD = 5V | Electric 200nm grid sizes: NMOS W=0.8u, PMOS W=1.6u, L=0.4u
 
-.global gnd vdd
+Mnmos@0 out in gnd gnd N L=0.4U W=0.8U
+Mpmos@0 out in vdd vdd P L=0.4U W=1.6U
+vdd vdd gnd 5
+Vin in gnd PULSE(5 0 0 10p 10p 10n 20n)
+.tran 60n
 
-*** TOP LEVEL CELL: NOT(sch)
-MNMOS Y A gnd gnd NMOS L=0.6U W=3U
-MPMOS vdd A Y vdd PMOS L=0.6U W=6U
-
-Vdd vdd gnd 5
-
-Vpulse A gnd PULSE(5 0 0 10p 10p 10n 20n)
-
-.tran 60ns
-
-* BSIM3 models for AMI Semiconductor's C5 process
-* 2<Ldrawn<500   10<Wdrawn<10000 Vdd=5V
-* Min L = 0.6um (L=2), Min W = 3um (W=10)
-
-.MODEL NMOS NMOS (                                 LEVEL   = 8
+.MODEL N NMOS (                                 LEVEL   = 8
 +VERSION = 3.1            TNOM    = 27             TOX     = 1.39E-8
 +XJ      = 1.5E-7         NCH     = 1.7E17         VTH0    = 0.6696061
 +K1      = 0.8351612      K2      = -0.0839158     K3      = 23.1023856
@@ -53,8 +43,8 @@ Vpulse A gnd PULSE(5 0 0 10p 10p 10n 20n)
 +CF      = 0              PVTH0   = 0.0585501      PRDSW   = 133.285505
 +PK2     = -0.0299638     WKETA   = -0.0248758     LKETA   = 1.173187E-3
 +AF      = 1              KF      = 0)
-
-.MODEL PMOS PMOS (                                 LEVEL   = 8
+*
+.MODEL P PMOS (                                 LEVEL   = 8
 +VERSION = 3.1            TNOM    = 27             TOX     = 1.39E-8
 +XJ      = 1.5E-7         NCH     = 1.7E17         VTH0    = -0.9214347
 +K1      = 0.5553722      K2      = 8.763328E-3    K3      = 6.3063558
